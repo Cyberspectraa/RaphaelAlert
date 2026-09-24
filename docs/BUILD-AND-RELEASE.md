@@ -1,0 +1,9 @@
+# Build and release information
+
+Raphael installers are built in GitHub Actions from the **private** RaphaelAlert-Source repository using Python 3.13, PyInstaller (Windows onedir), and Inno Setup 6 on a Windows runner. Only finished installers and release notes are published here. Application source and private CI artifacts are not distributed in this repository.
+
+Before publishing an installer, the private build must pass the source-content audit, automated tests, a build-output check that rejects plaintext Python source in the distribution, and Windows Defender scans of both the unpacked application and the final installer. The maintainer additionally tests installation/upgrade, tray controls, audio, overlay, TikFinity and update controls on a Windows PC. Defender results are a limited signal, not a guarantee that the binary is safe. Keep any detected installer out of releases.
+
+Each stable release needs a tag `vMAJOR.MINOR.PATCH`, exactly one release asset named `Raphael-Setup-MAJOR.MINOR.PATCH.exe`, and a release-body line `Installer SHA-256: <64-character lowercase hex digest>`. The exact checksum must come from hashing the EXE bytes actually attached to that release; the GitHub Actions artifact ZIP checksum is **not** the installer's checksum. The updater validates this metadata, filename, host, download size, and downloaded file hash. Checksum metadata in the same GitHub account provides integrity checking, not independent publisher authentication. Release assets should be code-signed when practicable.
+
+To upgrade, finish streaming, fully exit Raphael via its tray menu and use the official installer. Do not uninstall the previous version first. Keep user settings separate from installation files. Public releases must not include a source archive from the private repository.
