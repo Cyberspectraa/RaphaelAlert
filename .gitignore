@@ -1,0 +1,9 @@
+# Public repository holds release information only. Never commit private code or binaries.
+*.exe
+*.zip
+*.py
+*.pyw
+*.pyd
+*.dll
+*.env
+*.log
